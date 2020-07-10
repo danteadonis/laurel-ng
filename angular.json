@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "laurel-ng"
+    }
+  },
+  "defaultProject": "laurel-ng",
+  "cli": {
+    "analytics": "5c8c5c53-aa96-402e-8e96-9e2f002f8f78"
+  }
 }
