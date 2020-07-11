@@ -1,9 +1,32 @@
 
 <?php
-  echo "Hello " . $_POST['name'];
-  echo '<br>';
-  echo "You sent: " . $_POST['message'] . "\n from: " . $_POST['email'];
+  if(!empty($_POST['contactForm'])){
+    echo 'contact form not empty';
+  }
 
-  mail("adegboye72@gmail.com", "the subject", "the message body", "the header");
+  function sanitizeEmail($field){
+    $field= filter_var($field, FILTER_SANITIZE_EMAIL);
+    
+    if(filter_var($field, FILTER_VALIDATE_EMAIL)){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  $to= 'adegboye72@gmail.com';
+  $subject= 'Contact Us Form';
+  $message= 'message sent using php mail function.';
+  $headers= 'From: Contact Us @ laurel-ng.herokuapp.com';
+
+  // check if email address is valid or not.
+  $secureCheck= sanitizeEmail($to);
+  if($secureCheck == false){
+    echo "Invalid recipient email.";
+  }else{
+    // send email.
+    mail($to, $subject, $message, $headers);
+    echo 'email sent!';
+  }
 ?>
 
