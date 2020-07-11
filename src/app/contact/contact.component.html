@@ -1,8 +1,43 @@
+
+<?php
+  if(!empty($_POST['contactForm'])){
+    function sanitizeEmail($field){
+      $field= filter_var($field, FILTER_SANITIZE_EMAIL);
+      
+      if(filter_var($field, FILTER_VALIDATE_EMAIL)){
+        return true;
+      }else{
+        return false;
+      }
+    }
+  
+    $to= 'adegboye72@gmail.com';
+    $subject= 'Contact Us Form';
+    $message= 'message sent using php mail function.';
+    $headers= 'From: Contact Us @ laurel-ng.herokuapp.com';
+  
+    // check if email address is valid or not.
+    $secureCheck= sanitizeEmail($to);
+    if($secureCheck == false){
+      echo "Invalid recipient email.";
+    }else{
+      // send email.
+      mail($to, $subject, $message, $headers);
+      echo 'email sent!';
+    }
+
+  }
+
+  require_once "contactForm.php";
+
+?>
+
+
 <div id="contact" class="container">
   <div class="card card-block bg-dark p-4 text-white neumorph">
     <h3>Contact Us</h3>
     <p class="lead">Got any comments, observations, or complaints? Send us a short message.<br><span class="info text-muted">(your email is recommended but not compulsory)</span></p>
-    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="form-group" action="contact-submit.php" name="contactForm" method="POST">
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="form-group" action="contact-component.html" name="contactForm" method="POST">
       <div>
         <div class="input-group">
           <span class="input-group-addon text-white"><i class="far fa-user"></i></span>
@@ -23,7 +58,4 @@
     </form>
   </div>
   <div id="thanks" class="alert bg-dark text-white text-center my-4">Thanks for the feedback!<span (click)="closeThanks()" class="close text-white">&times;</span></div>
-  <div>
-    <!-- Hi <?php echo htmlspecialchars($_POST['contactForm']); ?> -->
-  </div>
 </div>
