@@ -1,6 +1,7 @@
 
 <?php
-  if(!empty($_POST['contactForm'])){
+
+  if(isset($_POST['submit'])){
     function sanitizeEmail($field){
       $field= filter_var($field, FILTER_SANITIZE_EMAIL);
       
