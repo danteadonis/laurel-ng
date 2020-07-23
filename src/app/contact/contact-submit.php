@@ -11,14 +11,14 @@
   $email= new PHPMailer(true);
 
   // from
-  $email->From= 'example@example.com';
+  $email->From= 'from@example.com';
   $email->FromName= 'mr. example example';
 
   // to
   $email->addAddress("adegboye72@gmail.com");
   
   // reply to
-  $email->addReplyTo("example@example.com", "reply");
+  $email->addReplyTo("replyto@example.com", "Reply To");
 
   // cc & bcc
   $email->addCC("cc@example.com");
@@ -28,15 +28,23 @@
   $email->isHTML(true);
 
   $email->Subject= 'subject here.';
-  $email->Body= '<i>message boddy in html here...</i>';
-  $email->AltBody= 'message boddy in plain text here...';
+  $email->Body= '<i>message body in html here...</i>';
+  $email->AltBody= 'message body in plain text here...';
 
   // send
-  try{
+  /*try{
     $email->send();
     echo 'Mail sent successfully';
   }catch(Exception $e){
     echo 'Mail Not Sent, error: ' . $email->ErrorInfo;
+  }*/
+
+  // new send
+  if(!$email->send()){
+    echo 'Message not sent o!';
+    echo 'Mailer Error: ' . $email->ErrorInfo;
+  }else{
+    echo 'Message has been sent.';
   }
 
   /*if(isset($_POST['submit'])){
@@ -65,9 +73,9 @@
       echo 'email sent!';
     }
 
-  }
+  }*/
 
-  require_once "contactForm.php";*/
+  // require_once "contactForm.php";
 
 ?>
 
